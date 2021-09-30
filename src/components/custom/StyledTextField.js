@@ -20,6 +20,6 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
 }));
 
 export default function StyledTextField(props) {
-  const { inputRef } = props;
-  return <CustomTextField {...inputRef} {...props} size="small"/>;
+  const { inputRef} = props;
+  return <CustomTextField {...inputRef} {...props}  size="small"/>;
 }

@@ -1,21 +1,24 @@
-import axios from 'axios'
+import axios from 'axios';
+// import TestMessage from '../utils/TestMessage';
+import Message from '../utils/Message';
 
 
 axios.interceptors.response.use(success => {
-    if (success.status && success.status == 200 && success.data.status == 500) {
-     
+    if (success.status && success.status === 200 && success.data.status === 500) {
+        
         return;
     }
-    if (success.data.msg) {
-     
+    if (success.data.message) {
+
+        Message.success(success.data.message);
     }
     return success.data;
 }, error => {
-    if (error.response.status == 504 || error.response.status == 404) {
-    } else if (error.response.status == 403) {
-    } else if (error.response.status == 401) {
+    if (error.response.status === 504 || error.response.status === 404) {
+    } else if (error.response.status === 403) {
+    } else if (error.response.status === 401) {
     } else {
-        if (error.response.data.msg) {
+        if (error.response.data.message) {
         } else {
         }
     }

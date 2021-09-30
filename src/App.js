@@ -5,13 +5,13 @@ import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import green from "@material-ui/core/colors/green";
+import GlobalSnackbars from "./components/custom/GlobalSnackbars";
 
 const theme = createTheme({
   palette: {
     primary: {
       main: green[500],
     },
-    
   },
 });
 
@@ -25,6 +25,7 @@ function App() {
           <Route path="/" component={Admin} />
         </Switch>
       </BrowserRouter>
+      <GlobalSnackbars />
     </ThemeProvider>
   );
 }

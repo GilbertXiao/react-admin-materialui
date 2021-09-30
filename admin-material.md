@@ -23,5 +23,7 @@ yarn add store
 
 yarn add react-hook-form
 
+yarn add http-proxy-middleware --dev
+
 ```
 

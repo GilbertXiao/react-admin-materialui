@@ -3,14 +3,18 @@ import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import clsx from "clsx";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import StyledTextField from "../../components/custom/StyledTextField";
+import { login } from "../../redux/actions";
 import bg from "./images/bg.jpg";
 import logo from "./images/logo.png";
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles({
   login: {
@@ -66,12 +70,29 @@ const useStyles = makeStyles({
 });
 
 function Login(props) {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [values, setValues] = useState({
     username: "",
     password: "",
     showPassword: false,
   });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "all",
+  });
+
+  // 如果用户已经登陆, 自动跳转到管理界面
+  const user = useSelector((state) => {
+    return state.loginReducer;
+  });
+
+  if (user && user.id) {
+    return <Redirect to="/" />;
+  }
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -86,16 +107,12 @@ function Login(props) {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    mode: "onBlur",
-  });
+
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    //console.log(values);
+    login(data.username, data.password)(dispatch);
   };
+
   return (
     <div className={classes.login}>
       <header className={classes.loginHeader}>
@@ -173,8 +190,11 @@ function Login(props) {
               }}
             />
           </div>
-
-          <input type="submit" />
+          <div className={classes.inputCtn}>
+            <Button type="submit" variant="contained" color="success">
+              Login
+            </Button>
+          </div>
         </form>
       </section>
     </div>
