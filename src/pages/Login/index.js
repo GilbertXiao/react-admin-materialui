@@ -15,6 +15,7 @@ import bg from "./images/bg.jpg";
 import logo from "./images/logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
+import Message from '../../utils/Message';
 
 const useStyles = makeStyles({
   login: {
@@ -110,8 +111,19 @@ function Login(props) {
 
   const onSubmit = (data) => {
     //console.log(values);
-    login(data.username, data.password)(dispatch);
+    Message.success("aaaaa");
+    //login(data.username, data.password)(dispatch);
   };
+
+  const test1=() => {
+    Message.warn("bbb");
+  }
+  const test2=() => {
+    Message.info("ccc");
+  }
+  const test3=() => {
+    Message.error("ddd");
+  }
 
   return (
     <div className={classes.login}>
@@ -193,6 +205,16 @@ function Login(props) {
           <div className={classes.inputCtn}>
             <Button type="submit" variant="contained" color="success">
               Login
+            </Button>
+
+            <Button  onClick={test1} variant="contained" color="success">
+              aaa
+            </Button>
+            <Button  onClick={test2} variant="contained" color="success">
+              bbb
+            </Button>
+            <Button  onClick={test3} variant="contained" color="success">
+              ccc
             </Button>
           </div>
         </form>
