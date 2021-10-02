@@ -1,6 +1,8 @@
 import { RECEIVE_USER, SHOW_ERROR_MSG,SET_HEAD_TITLE,RESET_USER} from "./actionType";
 import { getRequest, postRequest } from "../api/ajax";
 import { saveUser,removeUser } from "../utils/storageUtils";
+import Message from "../utils/Message";
+
 
 const receiveUser = (user) => ({ type: RECEIVE_USER, user });
 const showErrorMsg = (errorMsg) => ({ type: SHOW_ERROR_MSG, errorMsg });
@@ -36,12 +38,13 @@ export const login = (name, password) => {
         );
        
       } else {
+        Message.error("用户名或密码错误");
         dispatch(showErrorMsg("用户名或密码错误"));
       }
     } else {
       // 2.2. 如果失败, 分发失败的同步action
       const msg = result.msg;
-      // message.error(msg)
+      Message.error(msg);
       dispatch(showErrorMsg(msg));
     }
   };
