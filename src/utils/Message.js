@@ -14,18 +14,14 @@ export default class Message {
 
   static info = (msg) => {
     ReactDOM.render(
-      <GlobalSnackbars
-        openCount={Message.count++}
-        content={msg}
-        severity={"info"}
-      />,
+      <GlobalSnackbars key={Message.count++} content={msg} severity={"info"} />,
       Message.getDivCtn()
     );
   };
   static warn = (msg) => {
     ReactDOM.render(
       <GlobalSnackbars
-        openCount={Message.count++}
+        key={Message.count++}
         content={msg}
         severity={"warning"}
       />,
@@ -35,7 +31,7 @@ export default class Message {
   static success = (msg) => {
     ReactDOM.render(
       <GlobalSnackbars
-        openCount={Message.count++}
+        key={Message.count++}
         content={msg}
         severity={"success"}
       />,
@@ -45,7 +41,7 @@ export default class Message {
   static error = (msg) => {
     ReactDOM.render(
       <GlobalSnackbars
-        openCount={Message.count++}
+        key={Message.count++}
         content={msg}
         severity={"error"}
       />,

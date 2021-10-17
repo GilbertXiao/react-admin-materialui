@@ -3,12 +3,8 @@ import { Snackbar } from "@material-ui/core";
 import Alert from "@mui/material/Alert";
 
 const GlobalSnackbars = (props) => {
-  const { openCount, severity, content } = props;
-  const [openFlag, setOpenFlag] = useState(false);
-
-  useEffect(() => {
-    setOpenFlag(true);
-  }, [openCount]);
+  const {severity, content } = props;
+  const [openFlag, setOpenFlag] = useState(true);
 
   const closeFunc = () => {
     setOpenFlag(false);
